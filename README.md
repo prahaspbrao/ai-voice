@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎤 AI Voice App
 
-## Getting Started
+> A cutting-edge **Next.js + TypeScript** Progressive Web App that empowers you to interact by voice — completely **offline after first load**, except for OpenAI API calls.
 
-First, run the development server:
+Record your voice, transcribe speech *locally* with Whisper WASM, chat with OpenAI’s GPT, then synthesize and play back responses—all in near real-time.
+
+---
+
+## ✨ Key Features
+
+- 🛡️ **Offline-first**: Works seamlessly offline after initial asset caching (except OpenAI calls)  
+- 🎙️ **Local Speech-to-Text**: Whisper.cpp compiled to WebAssembly, running in a Web Worker for fast, private transcription  
+- 🔄 **Real-time streaming transcripts**: See your speech converted to text live  
+- 🤖 **AI-powered conversation**: Uses OpenAI Chat Completion API for natural replies  
+- 🗣️ **Local Text-to-Speech**: Coqui-style TTS models run in a Web Worker, converting AI responses to lifelike audio  
+- ⚡ **Instant playback**: Audio plays immediately after synthesis  
+- ⏱️ **Detailed latency metrics**: Tracks and displays timing for each stage (STT, API call, TTS, playback)  
+- 🎯 **Performance goal**: Total round-trip response under 1.2 seconds on good networks  
+
+---
+
+## 🚀 How It Works
+
+| Stage                   | Description                                                                                     |
+|-------------------------|-------------------------------------------------------------------------------------------------|
+| **1. Setup**            | Next.js + TypeScript PWA with service worker & manifest pre-caching Whisper & TTS model files. |
+| **2. Local STT**        | Stream microphone audio chunks to a WASM-powered Whisper worker for live transcription.         |
+| **3. OpenAI Chat API**  | Final transcript sent to OpenAI's Chat Completion endpoint to generate intelligent responses.   |
+| **4. Local TTS**        | Coqui TTS worker converts response text to audio, cached for offline use.                       |
+| **5. Playback & Metrics** | Play audio immediately and show detailed latency stats per stage.                               |
+
+---
+
+## 🏁 Quick Start
 
 ```bash
+git clone https://github.com/prahaspbrao/ai-voiec.git
+cd ai-voiec
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
